@@ -1,6 +1,7 @@
 import express from 'express'
 import conn from './database/mongodb.js'
 import Time from './model/timeModel.js'
+import mongoose from 'mongoose'
 
 const app = express()
 const PORT = 3000
@@ -14,48 +15,66 @@ app.get('/teste', (req, res) => {
 app.get('/times', async (req, res) => {
     try{
         const times = await Time.find({})
-
-        return res.status(200).json({
-            count: times.length,
-            data: times
-        })
+        return res.status(200).json({ count: times.length, data: times })
 
     }catch(error){
-        return console.log(error)
+        console.log(error)
+        return res.status(500).send({ message: error.message })
     }
 })
 
 app.get('/times/:id', async (req, res) => {
     try{
         const { id } = req.params
-
         const time = await Time.findById(id)
-
         return res.status(200).json(time)
 
     }catch(error){
-        return console.log(error)
+        console.log(error)
+        return res.status(500).send({ message: error.message })
     }
 })
 
 app.post('/time', async (req, res) => {
     try{
         const { nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld } = req.body
-
         if( !nome || !nacionalidade || !estadio || !capacidadeEstadio || !isCenturyOld ){
             return res.status(400).send({message: 'Preencha todos os campos'})
         }
-
         const newTime = { nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld }
-
         const time = await Time.create(newTime)
-
         return res.status(201).send(time)
 
     }catch(error){
-        return console.log(error)
+        console.log(error)
+        return res.status(500).send({ message: error.message })
     }
 })
+
+app.patch('/time/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(400).send({message: 'Preencha um id valido'})
+        }
+        const { nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld } = req.body
+        if(!nome && !nacionalidade && !estadio && !capacidadeEstadio && !isCenturyOld){
+            return res.status(400).send({message: 'Preencha pelo menos um campo'})
+        }
+        const updateTime = ({ nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld })
+        const time = await Time.findByIdAndUpdate({ _id: id }, updateTime)
+        return res.status(200).send(time)
+
+    }catch(error){
+        console.log(error)
+        return res.status(500).send({ message: error.message })
+    }
+})
+
+// Middleware caso não passe uma rota válida
+app.use((req, res) => {
+    res.status(404).send('404 - Not Found');
+});
 
 conn
 
