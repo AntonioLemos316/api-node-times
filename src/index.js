@@ -27,7 +27,10 @@ app.get('/times/:id', async (req, res) => {
     try{
         const { id } = req.params
         const time = await Time.findById(id)
-        return res.status(200).json(time)
+        if(!time){
+            return res.status(400).json({message: 'Time não foi encontrado, preencha um id válido!'})
+        }
+        return res.status(200).json({message: 'Encontrado!', data: time})
 
     }catch(error){
         console.log(error)
@@ -35,7 +38,7 @@ app.get('/times/:id', async (req, res) => {
     }
 })
 
-app.post('/time', async (req, res) => {
+app.post('/times', async (req, res) => {
     try{
         const { nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld } = req.body
         if( !nome || !nacionalidade || !estadio || !capacidadeEstadio || !isCenturyOld ){
@@ -43,7 +46,7 @@ app.post('/time', async (req, res) => {
         }
         const newTime = { nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld }
         const time = await Time.create(newTime)
-        return res.status(201).send(time)
+        return res.status(201).json({message: 'Criado com sucesso', data: time})
 
     }catch(error){
         console.log(error)
@@ -51,7 +54,7 @@ app.post('/time', async (req, res) => {
     }
 })
 
-app.patch('/time/:id', async (req, res) => {
+app.patch('/times/:id', async (req, res) => {
     try{
         const { id } = req.params
         const notIdValid = (isNotValid) => !mongoose.Types.ObjectId.isValid(isNotValid)
@@ -61,11 +64,33 @@ app.patch('/time/:id', async (req, res) => {
         }
         const updateTime = ({ nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld })
         const time = await Time.findByIdAndUpdate({ _id: id }, updateTime)
+        if(!time){
+            return res.status(400).send({message: 'Time não foi atualizado, preencha um id válido'})
+        }
         return res.status(200).json({message: 'Atualizado com sucesso', data: time})
 
     }catch(error){
         console.log(error)
         return res.status(500).send({ message: error.message })
+    }
+})
+
+app.delete('/times/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const notIdValid = (isNotValid) => !mongoose.Types.ObjectId.isValid(isNotValid)
+        if(notIdValid(id)){
+            return res.status(400).send({message: 'Preencha um id válido'})
+        }
+        const time = await Time.findByIdAndDelete(id)
+        if(!time){
+            return res.status(400).send({message: 'Time não foi deletado, preencha um id válido'})
+        }
+        return res.status(200).json({message: 'Deletado!', data: time})
+
+    }catch(error){
+        console.log(error)
+        return res.status(500).send({ message: error.message})
     }
 })
 
