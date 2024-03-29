@@ -85,18 +85,24 @@ Uma simples API para estudo do node/express com mongodb/mongoose na qual farei a
 
 1. Após a configuração inicial do package.json e instalação das dependências vamos configurar nossa estrutura de pasta
 
-- <img src="/img/Capturar001.PNG">
+<img src="/img/Capturar001.PNG">
 
 2. Em index.js importamos o express, em seguida iniciamos o express() em uma const chamada app e definimos a const PORT como 3000, por fim chamamos app.listen para indicar a porta na qual nosso servidor sera escutado e rodaremos no terminal o comando npm run dev para iniciar nosso servidor.
 
-- <img src="/img/Capturar002.PNG">
-- <img src="/img/Capturar003.PNG">
-- <img src="/img/Capturar004.PNG">
-- <img src="/img/Capturar004c.PNG">
-- <img src="/img/Capturar004b.PNG">
+<img src="/img/Capturar002.PNG">
+
+<img src="/img/Capturar003.PNG">
+
+<img src="/img/Capturar004.PNG">
+
+<img src="/img/Capturar004c.PNG">
+
+<img src="/img/Capturar004b.PNG">
 
 3. Usaremos um software chamado postman no qual testaremos nossas rotas, nesse caso testaremos a rota '/teste' segue abaixo nossa rota, requisição e resposta:
 
-- <img src="/img/Capturar007.PNG">
-- <img src="/img/Capturar005.PNG">
-- <img src="/img/Capturar006.PNG">
+<img src="/img/Capturar007.PNG">
+
+<img src="/img/Capturar005.PNG">
+
+<img src="/img/Capturar006.PNG">
