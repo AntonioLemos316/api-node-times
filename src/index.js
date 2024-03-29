@@ -54,16 +54,14 @@ app.post('/time', async (req, res) => {
 app.patch('/time/:id', async (req, res) => {
     try{
         const { id } = req.params
-        if(!mongoose.Types.ObjectId.isValid(id)){
-            return res.status(400).send({message: 'Preencha um id valido'})
-        }
+        const notIdValid = (isNotValid) => !mongoose.Types.ObjectId.isValid(isNotValid)
         const { nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld } = req.body
-        if(!nome && !nacionalidade && !estadio && !capacidadeEstadio && !isCenturyOld){
-            return res.status(400).send({message: 'Preencha pelo menos um campo'})
+        if((notIdValid(id)) || !nome && !nacionalidade && !estadio && !capacidadeEstadio && !isCenturyOld){
+            return res.status(400).send({message: 'Preencha um id válido e pelo menos um campo'})
         }
         const updateTime = ({ nome, nacionalidade, estadio, capacidadeEstadio, isCenturyOld })
         const time = await Time.findByIdAndUpdate({ _id: id }, updateTime)
-        return res.status(200).send(time)
+        return res.status(200).json({message: 'Atualizado com sucesso', data: time})
 
     }catch(error){
         console.log(error)
