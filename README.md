@@ -131,9 +131,13 @@ Uma simples API para estudo do node/express com mongodb/mongoose na qual farei a
 
   <img src="/img/Capturar008.PNG">
 
-- Atribuindo a const conn o método connect ao acessar o mongoose, que será uma promise e através de variáveis de ambiente do dotenv passaremos as informações sensíveis e então teremos um sucesso ou erro
+- Atribuindo nas constantes USER, PASSWORD e DATABASE, as nossas variáveis de ambiente com informações importantes
 
   <img src="/img/Capturar009.PNG">
+
+- Atribuindo a const conn o método connect ao acessar o mongoose, na qual será uma promise que poderá retornar um sucesso ou uma rejeição ao tentar fazer a conexão
+
+  <img src="/img/Capturar009b.PNG">
 
 - Exportamos a const conn
 
@@ -154,3 +158,5 @@ Uma simples API para estudo do node/express com mongodb/mongoose na qual farei a
 - Em seguida se tivermos sucesso na conexão, teremos a seguinte mensagem no terminal
 
   <img src="/img/Capturar014.PNG">
+
+5. Vamos agora configurar timeModel.js na pasta model
