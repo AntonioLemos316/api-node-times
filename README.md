@@ -121,8 +121,36 @@ Uma simples API para estudo do node/express com mongodb/mongoose na qual farei a
 
   <img src="/img/Capturar005.PNG">
 
-- Respota do servidor/postman ao cliente
+- Resposta do servidor/postman ao cliente
 
   <img src="/img/Capturar006.PNG">
 
-4. Em seguida vamos configurar nossa pasta database e o arquivo mongodb.js para fazer nossa conexão com o mongodbAtlas
+4. Em seguida vamos configurar nossa pasta database o arquivo mongodb.js para fazer nossa conexão com o mongodbAtlas, faremos o import do mongoose para poder chamar o metodo connect e o dotenv para proteger informações.
+
+- Import do mongoose e dotenv
+
+  <img src="/img/Capturar008.PNG">
+
+- Atribuindo a const conn o método connect ao acessar o mongoose, que será uma promise e através de variáveis de ambiente do dotenv passaremos as informações sensíveis e então teremos um sucesso ou erro
+
+  <img src="/img/Capturar009.PNG">
+
+- Exportamos a const conn
+
+  <img src="/img/Capturar010.PNG">
+
+- Importamos conn no arquivo index.js
+
+  <img src="/img/Capturar011.PNG">
+
+- Chamamos a conn antes de onde o servidor está sendo escutado
+
+  <img src="/img/Capturar012.PNG">
+
+- Iniciamos no terminal nosso servidor e a conexão
+
+  <img src="/img/Capturar013.PNG">
+
+- Em seguida se tivermos sucesso na conexão, teremos a seguinte mensagem no terminal
+
+  <img src="/img/Capturar014.PNG">
