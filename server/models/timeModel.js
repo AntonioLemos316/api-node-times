@@ -4,18 +4,9 @@ const timeSchema = mongoose.Schema({
     nome: { 
         type: String 
     },
-    nacionalidade: { 
-        type: String
-    },
-    estadio: { 
-        type: String 
-    },
-    capacidadeEstadio: { 
+    qtdTorcedor: { 
         type: Number 
     },
-    isCenturyOld: { 
-        type: Boolean 
-    }
 })
 
 const Time = mongoose.model('Time', timeSchema)
