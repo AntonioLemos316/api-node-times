@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
-import Repository from "../models/timeRepository.js";
+import timeRepository from "../models/timeRepository.js";
 
 const findAll = async (req, res) => {
     try{
-        const times = await Repository.findAll({})
+        const times = await timeRepository.findAll({})
         return res.status(200).json({ count: times.length, data: times })
     }catch(error){
         console.log(error)
@@ -14,7 +14,7 @@ const findAll = async (req, res) => {
 const findById = async (req, res) => {
     try{
         const { id } = req.params
-        const time = await Repository.findById(id)
+        const time = await timeRepository.findById(id)
         if(!time){
             return res.status(400).json({message: 'Time não foi encontrado, preencha um id válido!'})
         }
@@ -32,7 +32,7 @@ const create = async (req, res) => {
             return res.status(400).send({message: 'Preencha todos os campos'})
         }
         const newTime = { nome, qtdTorcedor }
-        const time = await Repository.create(newTime)
+        const time = await timeRepository.create(newTime)
         return res.status(201).json({message: 'Criado com sucesso', data: time})
     }catch(error){
         console.log(error)
@@ -49,7 +49,7 @@ const update = async (req, res) => {
             return res.status(400).send({message: 'ID inválido ou preencha algum campo!'})
         }
         const updateTime = ({ nome, qtdTorcedor })
-        const time = await Repository.update({ _id: id }, updateTime)
+        const time = await timeRepository.update({ _id: id }, updateTime)
         if(!time){
             return res.status(400).send({message: 'Erro ao atualizar!'})
         }
@@ -67,7 +67,7 @@ const findAndDelete = async (req, res) => {
         if(!isIdValid){
             return res.status(400).send({message: 'ID inválido'})
         }
-        const time = await Repository.findAndDelete(id)
+        const time = await timeRepository.findAndDelete(id)
         if(!time){
             return res.status(400).send({message: 'Erro ao deletar, preencha um id válido'})
         }

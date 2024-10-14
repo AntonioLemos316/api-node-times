@@ -5,8 +5,7 @@ const findAll = async () => {
         const result = await Time.find({})
         return result
     } catch (error) {
-        console.log(error)
-        throw new Error({message: error});
+        throw new Error(error.message);
     }
 }
 
@@ -15,8 +14,7 @@ const findById = async (id) => {
         const result = await Time.findById(id)
         return result
     } catch (error) {
-        console.log(error)
-        throw new Error({message: error});       
+        throw new Error(error.message);      
     }
 }
 
@@ -25,8 +23,7 @@ const create = async (newTime) => {
         const result = await Time.create(newTime)
         return result
     } catch (error) {
-        console.log(error)
-        throw new Error({message: error});
+        throw new Error(error.message);
     }
 }
 
@@ -35,8 +32,7 @@ const update = async (id, updateTime) => {
         const result = await Time.findByIdAndUpdate(id, updateTime)
         return result 
     } catch (error) {
-        console.log(error)
-        throw new Error({message: error});
+        throw new Error(error.message);
     }
 }
 
@@ -46,7 +42,7 @@ const findAndDelete = async (id) => {
         return result
     } catch (error) {
         console.log(error)
-        throw new Error({message: error});
+        throw new Error(error.message);
     }
 }
 

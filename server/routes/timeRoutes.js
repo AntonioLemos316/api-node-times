@@ -1,12 +1,12 @@
 import express from 'express'
-import Controller from '../controllers/timeController.js'
+import timeController from '../controllers/timeController.js'
 
 const router = express.Router()
 
-router.get('/', Controller.findAll)
-router.post('/', Controller.create)
-router.get('/:id', Controller.findById)
-router.patch('/:id', Controller.update)
-router.delete('/:id', Controller.findAndDelete)
+router.get('/', timeController.findAll)
+router.post('/', timeController.create)
+router.get('/:id', timeController.findById)
+router.patch('/:id', timeController.update)
+router.delete('/:id', timeController.findAndDelete)
 
 export default router
