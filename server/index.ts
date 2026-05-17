@@ -10,7 +10,7 @@ import userRoutes from './routes/userRoutes.js'
 const app: Express = express()
 
 const PORT: number = 3000
-const API: string = 'api/v1'
+const API: string = 'api/v2'
 
 app.use(express.json())
 
