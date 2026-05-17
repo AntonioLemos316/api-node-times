@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const timeSchema = mongoose.Schema({
+const timeSchema = new mongoose.Schema({
     nome: { 
         type: String 
     },

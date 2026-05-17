@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const paisSchema = mongoose.Schema({
+const paisSchema = new mongoose.Schema({
     pais: { 
         type: String
     },
